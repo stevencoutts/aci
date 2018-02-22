@@ -1,0 +1,119 @@
+To work on this lab from your own machine, you'll need to meet the following requirements.
+
+Client Pre-Reqs
+Python 2.7
+virtual environment (suggested but not required)
+pip
+"git" command line tools
+Google Chrome + Postman
+ACI Toolkit
+Cobra SDK
+Workstation Setup Instructions
+This lab can be completed from a Windows, Mac, or Linux workstation as long as the above pre-reqs are installed. If you are using a Linux distribution, then it is likely you already have Python 2.7 installed. To assist with completion, here are some suggested steps to prepare common platforms.
+
+If your environment requires a proxy server to access internet resources, be sure that it is configured correctly on your system, and adjust any steps/commands listed below as needed.
+
+Install Python
+CentOS Sample Setup Instructions Example
+Standard Development Tools
+sudo yum -y groupinstall development
+Python 2.7
+sudo yum -y install gcc
+sudo yum -y install wget
+wget https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tgz
+tar xzf Python-2.7.13.tgz
+cd Python-2.7.13
+./configure  --prefix=/usr/local --enable-unicode=ucs4 --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
+make altinstall
+sudo yum -y install python-pip
+sudo pip install virtualenv
+OpenSSL Development Library
+sudo yum -y install openssl-devel\
+Ubuntu Sample Setup Instructions Example
+Standard Development Tools
+sudo apt-get install build-essential
+Python 2.7
+wget https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tgz
+tar xzf Python-2.7.13.tgz
+cd Python-2.7.13
+./configure  --prefix=/usr/local --enable-unicode=ucs4
+make altinstall
+sudo apt-get install python-pip -y
+sudo pip install virtualenv
+OpenSSL Development Library
+sudo apt -y install libssl-dev
+Mac OS X Installation
+git installation - https://git-scm.com/download/mac
+Python 2.7 installation - https://www.python.org/downloads/release/python-2713/
+Python pip installation
+curl -o get-pip.py https://bootstrap.pypa.io/get-pip.py
+sudo python get-pip.py
+Python 2.7 Customization
+sudo pip install virtualenv
+Command Line Developer Tools Installation
+xcode-select --install
+After running command, complete installation using the GUI.
+Windows Installation
+git installation - https://git-scm.com/download/win
+Python 2.7 installation - https://www.python.org/downloads/release/python-2713/
+Be sure to check box for "Add Python 2.7 to PATH" on the first page of the installer
+Python 2.7 Customization
+pip install virtualenv
+
+Microsoft Visual C++ Compiler for Python 2.7
+Install Postman
+This lab uses Postman to make API calls; if you do not have it installed, it can be downloaded from:
+
+https://www.getpostman.com/apps
+Pull Down Sample Code and Prep Python Environment
+With the software pre-reqs installed on your workstation, next you will get the sample code from GitHub, setup the Python environment, and install any Python requirements with pip.
+
+MAC or Linux
+#From your working directory
+git clone https://github.com/CiscoDevNet/aci-learning-labs-code-samples
+cd aci-learning-labs-code-samples
+virtualenv venv --python=python2.7
+source venv/bin/activate
+pip install -r requirements.txt
+
+Windows
+#From your working directory
+git clone https://github.com/CiscoDevNet/aci-learning-labs-code-samples
+cd aci-learning-labs-code-samples
+virtualenv venv --python=C:\Python27\python.exe
+venv\Scripts\activate.bat
+pip install -r requirements.txt
+
+Install ACI Toolkit
+With your Virtual Environment activated, you can now download and install the ACI Toolkit using git.
+
+Full details on ACI Toolkit available in documentation
+
+MAC or Linux or Windows
+# From your working directory
+git clone https://github.com/datacenter/acitoolkit.git
+cd acitoolkit
+python setup.py install
+Install Cobra SDK
+Step 1: Download SDK Files
+Full details on Cobra SDK available in documentation
+
+The Cobra SDK files are typically downloaded from a physical APIC appliance. If you have a physical APIC running code 3.0 or higher, you can browse to your APIC address and download both Python 2.7 egg files:
+
+http[s]://[APIC address]/cobra/_downloads/
+
+NOTE: If you don't have an access to APIC you may download the egg files from DevNet by clicking on below links.
+
+You will need to be logged into DevNet in order to download the files. If you are prompted to login after clicking a link and the download doens't start, just click the link a second time after logging in.
+
+acicobra-3.0_1k-py2.7.egg
+acimodel-3.0_1k-py2.7.egg
+Step 2: Install SDK
+With your Virtual Environment activated, you can now install the Python Cobra SDK Modules.
+
+MAC or Linux or Windows
+# From your Downloads Dirctory
+easy_install -Z acicobra-[apic_version]-py2.7.egg
+easy_install -Z acimodel-[apic_version]-py2.7.egg
+
+# Note: If you are NOT using a Virtual Environment, you may need to use "sudo" to install
