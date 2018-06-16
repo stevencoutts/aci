@@ -34,17 +34,17 @@ This is the minimal configuration necessary to enable packet forwarding
 within the ACI fabric.
 """
 # Create the Tenant
-tenant = Tenant('tutorial')
+tenant = Tenant('softcat-test')
 
 # Create the Application Profile
-app = AppProfile('myapp', tenant)
+app = AppProfile('sc-app', tenant)
 
 # Create the EPG
-epg = EPG('myepg', app)
+epg = EPG('sc-epg', app)
 
 # Create a Context and BridgeDomain
-context = Context('myvrf', tenant)
-bd = BridgeDomain('mybd', tenant)
+context = Context('sc-default-vrf', tenant)
+bd = BridgeDomain('sc-default-bd', tenant)
 bd.add_context(context)
 
 # Place the EPG in the BD
