@@ -4,5 +4,7 @@
 #
 # Steven Coutts - stevec@couttsnet.com - 4 November 2018
 
-import acifunctions as acif
+import acifunctions as aci
+aci.login(admin, ciscopsdt, 'https://sandboxapicdc.cisco.com')
+
 
