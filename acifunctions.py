@@ -10,3 +10,22 @@ def login (username, password, url):
     session.login()
     return session
 
+def createTenant (tenantName):
+    tenant = Tenant(tenantName)
+    return tenant
+
+def createAppProfile (AppName, tenant):
+    app = AppProfile(AppName, tenant)
+    return app
+
+def createEPG (epgName, app):
+    epg = EPG(epgName, app)
+    return epg
+
+def createVRF (vrfName, tenant):
+    context = Context(vrfName, tenant)
+    return context
+
+def createBD (BDName, tenant):
+    bd = BridgeDomain(BDName, tenant)
+    return bd

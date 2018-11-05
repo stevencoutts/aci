@@ -7,18 +7,26 @@
 import acifunctions as aci
 from acitoolkit.acitoolkit import *
 
-session = aci.login('admin', 'ciscopsdt', 'https://sandboxapicdc.cisco.com')
+tenantName = 'forfusion-test'
+appName = 'forfusion-app'
+epgName = 'forfusion-epg'
+bridgeDomainName = 'forfusion-bd'
+vrfName = 'forfusion-vrf'
 
+session = aci.login('admin', 'ciscopsdt', 'https://sandboxapicdc.cisco.com')
 # Create the Tenant
-tenant = Tenant('forfusion-test')
+tenant = aci.createTenant(tenantName)
 # Create the Application Profile
-app = AppProfile('for-app', tenant)
+app = aci.createAppProfile(appName, tenant)
 # Create the EPG
-epg = EPG('for-epg', app)
+epg = aci.createEPG(epgName, app)
 # Create a Context and BridgeDomain
-context = Context('for-default-vrf', tenant)
-bd = BridgeDomain('for-default-bd', tenant)
-bd.add_context(context)
+vrf = aci.createVRF(vrfName, tenant)
+bd = aci.createBD(bridgeDomainName, tenant)
+
+
+
+bd.add_context(vrf)
 # Place the EPG in the BD
 epg.add_bd(bd)
 
