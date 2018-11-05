@@ -5,8 +5,9 @@
 # Steven Coutts - stevec@couttsnet.com - 4 November 2018
 
 import acifunctions as aci
+from acitoolkit.acitoolkit import *
 
-session = aci.login(admin, ciscopsdt, 'https://sandboxapicdc.cisco.com')
+session = aci.login('admin', 'ciscopsdt', 'https://sandboxapicdc.cisco.com')
 
 # Create the Tenant
 tenant = Tenant('forfusion-test')
