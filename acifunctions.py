@@ -34,3 +34,7 @@ def createSubnet (subnetName, subnetIP, bd):
     subnet = Subnet(subnetName, bd)
     subnet.set_addr(subnetIP)
     return subnet
+
+def createContract (ContractName, tenant):
+    contract = Contract(ContractName, tenant)
+    return contract
