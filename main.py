@@ -3,6 +3,8 @@
 # ACI main/test script
 #
 # Steven Coutts - stevec@couttsnet.com - 4 November 2018
+#
+# 13-July-2019 - Minor updates, add subnet to the BD, changed names of stuff
 
 import acifunctions as aci
 from acitoolkit.acitoolkit import *
@@ -20,11 +22,13 @@ tenant = aci.createTenant(tenantName)
 app = aci.createAppProfile(appName, tenant)
 # Create the EPG
 epg = aci.createEPG(epgName, app)
-# Create a Context and BridgeDomain
+# Create a VRF and BridgeDomain
 vrf = aci.createVRF(vrfName, tenant)
 bd = aci.createBD(bridgeDomainName, tenant)
+# Add the vrf to the bridgedomain
 bd.add_context(vrf)
 # Add a subnet to the bridge domain
+
 
 # Place the EPG in the BD
 epg.add_bd(bd)

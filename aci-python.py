@@ -1,5 +1,6 @@
 import requests
 import json
+import acifunctions.py
 
 def get_cookies(apic):
     username = 'admin'
@@ -9,15 +10,15 @@ def get_cookies(apic):
     authenticate = requests.post(url, data=json.dumps(auth), verify=False)
     return authenticate.cookies
 
-def add_tenant(apic,cookies):
-    jsondata = {"fvTenant":{"attributes":{"dn":"uni/tn-Procurement","name":"Procurement","rn":"tn-Procurement","status":"created"},"children":[]}}
-    result = requests.post('{0}://{1}/api/node/mo/uni/tn-Procurement.json'.format(protocol, host), cookies=cookies, data=json.dumps(jsondata), verify=False)
+def add_tenant(tenant, apic,cookies):
+    jsondata = {"fvTenant":{"attributes":{"dn":"uni/tn-Softcat","name":"Softcat","rn":"tn-Softcat","status":"created"},"children":[]}}
+    result = requests.post('{0}://{1}/api/node/mo/uni/tn-Softcat.json'.format(protocol, host), cookies=cookies, data=json.dumps(jsondata), verify=False)
     print result.status_code
     print result.text
 
 def add_vrf(apic,cookies):
-    jsondata = {"fvCtx":{"attributes":{"dn":"uni/tn-Procurement/ctx-Internal","name":"Internal","rn":"ctx-Internal","status":"created"},"children":[]}}
-    result = requests.post('{0}://{1}/api/node/mo/uni/tn-Procurement/ctx-Internal.json'.format(protocol, host), cookies=cookies, data=json.dumps(jsondata), verify=False)
+    jsondata = {"fvCtx":{"attributes":{"dn":"uni/tn-Softcat/ctx-Internal","name":"Internal","rn":"ctx-Internal","status":"created"},"children":[]}}
+    result = requests.post('{0}://{1}/api/node/mo/uni/tn-Softcat/ctx-Internal.json'.format(protocol, host), cookies=cookies, data=json.dumps(jsondata), verify=False)
     print result.status_code
     print result.text
 
@@ -33,7 +34,7 @@ if __name__ == "__main__":
     host = 'sandboxapicdc.cisco.com'
     apic = '{0}://{1}'.format(protocol, host)
     cookies = get_cookies(apic)
-    add_tenant(apic,cookies)
+    add_tenant("Softcat",apic,cookies)
     add_vrf(apic,cookies)
     rsp = get_tenants(apic,cookies)
     rsp_dict = json.loads(rsp)
