@@ -48,14 +48,27 @@ bridgeDomainName = 'sfctBdDB'
 subnetName = "sfctSubnet10.100.200.0-24"
 subnetIP = "10.100.200.1/24"
 # Create the Application Profile
-app = aci.createAppProfile(appName, tenant)
+app2 = aci.createAppProfile(appName, tenant)
 # Create the EPG
-epg = aci.createEPG(epgName, app)
+epg = aci.createEPG(epgName, app2)
 # Create a VRF and BridgeDomain
 vrf = aci.createVRF(vrfName, tenant)
 bd = aci.createBD(bridgeDomainName, tenant)
 # Add the vrf to the bridgedomain
 bd.add_context(vrf)
+# Add a subnet to the bridge domain
+subnet = aci.createSubnet(subnetName, subnetIP, bd)
+bd.add_subnet(subnet)
+# Place the EPG in the BD
+epg.add_bd(bd)
+#
+#
+#
+epgName = 'sfctEpgWebDev'
+subnetName = "sfctSubnet10.100.101.0-24"
+subnetIP = "10.100.101.1/24"
+# Create the EPG
+epg = aci.createEPG(epgName, app)
 # Add a subnet to the bridge domain
 subnet = aci.createSubnet(subnetName, subnetIP, bd)
 bd.add_subnet(subnet)
