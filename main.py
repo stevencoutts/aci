@@ -7,11 +7,11 @@
 import acifunctions as aci
 from acitoolkit.acitoolkit import *
 
-tenantName = 'forfusion-test'
-appName = 'forfusion-app'
-epgName = 'forfusion-epg'
-bridgeDomainName = 'forfusion-bd'
-vrfName = 'forfusion-vrf'
+tenantName = 'Softcat'
+appName = 'Softcat-app'
+epgName = 'Softcat-epg'
+bridgeDomainName = 'Softcat-bd'
+vrfName = 'Softcat-vrf'
 
 session = aci.login('admin', 'ciscopsdt', 'https://sandboxapicdc.cisco.com')
 # Create the Tenant
