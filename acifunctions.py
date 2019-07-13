@@ -29,3 +29,8 @@ def createVRF (vrfName, tenant):
 def createBD (BDName, tenant):
     bd = BridgeDomain(BDName, tenant)
     return bd
+
+def createSubnet (subnetName, subnetIP, bd):
+    subnet = Subnet(subnetName, bd)
+    subnet.set_addr(subnetIP)
+    return subnet
