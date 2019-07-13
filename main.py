@@ -8,10 +8,10 @@ import acifunctions as aci
 from acitoolkit.acitoolkit import *
 
 tenantName = 'Softcat'
-appName = 'Softcat-app'
-epgName = 'Softcat-epg'
-bridgeDomainName = 'Softcat-bd'
-vrfName = 'Softcat-vrf'
+appName = 'sfct-nginx'
+epgName = 'sfct-web'
+bridgeDomainName = 'sfct-web-bd'
+vrfName = 'sfct-web-vrf'
 
 session = aci.login('admin', 'ciscopsdt', 'https://sandboxapicdc.cisco.com')
 # Create the Tenant
@@ -23,10 +23,9 @@ epg = aci.createEPG(epgName, app)
 # Create a Context and BridgeDomain
 vrf = aci.createVRF(vrfName, tenant)
 bd = aci.createBD(bridgeDomainName, tenant)
-
-
-
 bd.add_context(vrf)
+# Add a subnet to the bridge domain
+
 # Place the EPG in the BD
 epg.add_bd(bd)
 
