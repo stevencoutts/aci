@@ -38,3 +38,7 @@ def createSubnet (subnetName, subnetIP, bd):
 def createContract (ContractName, tenant):
     contract = Contract(ContractName, tenant)
     return contract
+
+def createFilter (FilterName, tenant, dFromPort, dToPort):
+    filter = FilterEntry(FilterName, tenant, "false", "req", dFromPort, dToPort)
+    return filter

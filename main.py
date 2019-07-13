@@ -61,10 +61,17 @@ subnet = aci.createSubnet(subnetName, subnetIP, bd)
 bd.add_subnet(subnet)
 # Place the EPG in the BD
 epg.add_bd(bd)
+#
 # Create a contract
+#
 contractName = "sfctCtrctDB"
 contract = aci.createContract(contractName, tenant)
+# Create a Filter
+filterName = "MySQL"
+#filter = aci.createFilter(filterName, tenant, "3309", "3309")
+#
 # Push to the APIC
+#
 resp = tenant.push_to_apic(session)
 if not resp.ok:
     print('%% Error: Could not push configuration to APIC')
