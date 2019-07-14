@@ -98,8 +98,8 @@ tcp_entry = FilterEntry('tcpentry',
                         dToPort='3306',
                         etherT='ip',
                         prot='tcp',
-                        sFromPort='5000',
-                        sToPort='5010',
+                        sFromPort='unspecified',
+                        sToPort='unspecified',
                         tcpRules='unspecified',
                         parent=contractSfctCtrctDB)
 #
