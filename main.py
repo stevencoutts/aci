@@ -53,14 +53,14 @@ app2 = aci.createAppProfile(appName, tenant)
 epg = aci.createEPG(epgName, app2)
 # Create a VRF and BridgeDomain
 vrf = aci.createVRF(vrfName, tenant)
-bd = aci.createBD(bridgeDomainName, tenant)
+bd2 = aci.createBD(bridgeDomainName, tenant)
 # Add the vrf to the bridgedomain
-bd.add_context(vrf)
+bd2.add_context(vrf)
 # Add a subnet to the bridge domain
-subnet = aci.createSubnet(subnetName, subnetIP, bd)
-bd.add_subnet(subnet)
+subnet = aci.createSubnet(subnetName, subnetIP, bd2)
+bd2.add_subnet(subnet)
 # Place the EPG in the BD
-epg.add_bd(bd)
+epg.add_bd(bd2)
 #
 #
 #
