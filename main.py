@@ -25,19 +25,19 @@ session = aci.login('admin', 'ciscopsdt', 'https://sandboxapicdc.cisco.com')
 # Create the Tenant
 tenant = aci.createTenant(tenantName)
 # Create the Application Profile
-app = aci.createAppProfile(appName, tenant)
+appSfctAppNginx = aci.createAppProfile(appName, tenant)
 # Create the EPG
-epg = aci.createEPG(epgName, app)
+epgSfctEpgWeb = aci.createEPG(epgName, appSfctAppNginx)
 # Create a VRF and BridgeDomain
 vrf = aci.createVRF(vrfName, tenant)
-bd = aci.createBD(bridgeDomainName, tenant)
+bdSfctBdWeb = aci.createBD(bridgeDomainName, tenant)
 # Add the vrf to the bridgedomain
-bd.add_context(vrf)
+bdSfctBdWeb.add_context(vrf)
 # Add a subnet to the bridge domain
-subnet = aci.createSubnet(subnetName, subnetIP, bd)
-bd.add_subnet(subnet)
+subnet = aci.createSubnet(subnetName, subnetIP, bdSfctBdWeb)
+bdSfctBdWeb.add_subnet(subnet)
 # Place the EPG in the BD
-epg.add_bd(bd)
+epgSfctEpgWeb.add_bd(bdSfctBdWeb)
 #
 # Create and the DB EPG
 #
@@ -48,19 +48,19 @@ bridgeDomainName = 'sfctBdDB'
 subnetName = "sfctSubnet10.100.200.0-24"
 subnetIP = "10.100.200.1/24"
 # Create the Application Profile
-app2 = aci.createAppProfile(appName, tenant)
+appSfctAppMysql = aci.createAppProfile(appName, tenant)
 # Create the EPG
-epg = aci.createEPG(epgName, app2)
+epgSfctEpgDB = aci.createEPG(epgName, appSfctAppMysql)
 # Create a VRF and BridgeDomain
 vrf = aci.createVRF(vrfName, tenant)
-bd2 = aci.createBD(bridgeDomainName, tenant)
+bdSfctBdDB = aci.createBD(bridgeDomainName, tenant)
 # Add the vrf to the bridgedomain
-bd2.add_context(vrf)
+bdSfctBdDB.add_context(vrf)
 # Add a subnet to the bridge domain
-subnet = aci.createSubnet(subnetName, subnetIP, bd2)
-bd2.add_subnet(subnet)
+subnet = aci.createSubnet(subnetName, subnetIP, bdSfctBdDB)
+bdSfctBdDB.add_subnet(subnet)
 # Place the EPG in the BD
-epg.add_bd(bd2)
+epgSfctEpgDB.add_bd(bdSfctBdDB)
 #
 #
 #
@@ -68,20 +68,26 @@ epgName = 'sfctEpgWebDev'
 subnetName = "sfctSubnet10.100.101.0-24"
 subnetIP = "10.100.101.1/24"
 # Create the EPG
-epg = aci.createEPG(epgName, app)
+epgSfctEpgWebDev = aci.createEPG(epgName, appSfctAppNginx)
 # Add a subnet to the bridge domain
-subnet = aci.createSubnet(subnetName, subnetIP, bd)
-bd.add_subnet(subnet)
+subnet = aci.createSubnet(subnetName, subnetIP, bdSfctBdWeb)
+bdSfctBdWeb.add_subnet(subnet)
 # Place the EPG in the BD
-epg.add_bd(bd)
+epgSfctEpgWebDev.add_bd(bdSfctBdWeb)
 #
 # Create a contract
 #
 contractName = "sfctCtrctDB"
-contract = aci.createContract(contractName, tenant)
+contractSfctCtrctDB = aci.createContract(contractName, tenant)
 # Create a Filter
 filterName = "MySQL"
 #filter = aci.createFilter(filterName, tenant, "3309", "3309")
+#
+# Provide/consume contrtact
+#
+epgSfctEpgDB.provide(contractSfctCtrctDB)
+epgSfctEpgWeb.consume(contractSfctCtrctDB)
+epgSfctEpgWebDev.consume(contractSfctCtrctDB)
 #
 # Push to the APIC
 #
