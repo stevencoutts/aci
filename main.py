@@ -80,8 +80,28 @@ epgSfctEpgWebDev.add_bd(bdSfctBdWeb)
 contractName = "sfctCtrctDB"
 contractSfctCtrctDB = aci.createContract(contractName, tenant)
 # Create a Filter
-filterName = "MySQL"
-#filter = aci.createFilter(filterName, tenant, "3309", "3309")
+icmp_entry = FilterEntry('icmpentry',
+                         applyToFrag='no',
+                         arpOpc='unspecified',
+                         dFromPort='unspecified',
+                         dToPort='unspecified',
+                         etherT='ip',
+                         prot='icmp',
+                         sFromPort='unspecified',
+                         sToPort='unspecified',
+                         tcpRules='unspecified',
+                         parent=contractSfctCtrctDB)
+tcp_entry = FilterEntry('tcpentry',
+                        applyToFrag='no',
+                        arpOpc='unspecified',
+                        dFromPort='3306',
+                        dToPort='3306',
+                        etherT='ip',
+                        prot='tcp',
+                        sFromPort='5000',
+                        sToPort='5010',
+                        tcpRules='unspecified',
+                        parent=contractSfctCtrctDB)
 #
 # Provide/consume contrtact
 #
